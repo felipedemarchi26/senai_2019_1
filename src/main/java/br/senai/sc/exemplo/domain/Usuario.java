@@ -10,6 +10,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "usuario")
@@ -21,16 +26,24 @@ public class Usuario {
 	private Long idUsuario;
 	
 	@Column(name="nome", nullable=false, length=100)
+	@NotBlank(message="O nome é obrigatório!")
+	@Size(max=100)
 	private String nome;
 	
 	@Column(name="email", nullable=false, length=100, unique=true)
+	@NotBlank(message="O e-mail é obrigatório")
+	@Size(max=100)
+	@Email(message="Formato de e-mail inválido!")
 	private String email;
 	
 	@Column(name="cpf", nullable=false, length=14, unique=true)
+	@NotBlank(message="O CPF é obrigatório!")
+	@Size(message="O CPF deve estar no padrão 999.999.999-99", max=14)
 	private String cpf;
 	
 	@Column(name="datanascimento", nullable=false)
 	@Temporal(TemporalType.DATE)
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date dataNascimento;
 	
 	@Column(name="descricao", nullable=true, columnDefinition="text")
