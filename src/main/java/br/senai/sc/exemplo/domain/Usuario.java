@@ -27,18 +27,18 @@ public class Usuario {
 	
 	@Column(name="nome", nullable=false, length=100)
 	@NotBlank(message="O nome é obrigatório!")
-	@Size(max=100)
+	@Size(max=100, message="O nome deve conter no máximo 100 caracteres!")
 	private String nome;
 	
 	@Column(name="email", nullable=false, length=100, unique=true)
 	@NotBlank(message="O e-mail é obrigatório")
-	@Size(max=100)
+	@Size(max=100, message="O e-mail deve conter no máximo 100 caracteres!")
 	@Email(message="Formato de e-mail inválido!")
 	private String email;
 	
 	@Column(name="cpf", nullable=false, length=14, unique=true)
 	@NotBlank(message="O CPF é obrigatório!")
-	@Size(message="O CPF deve estar no padrão 999.999.999-99", max=14)
+	@Size(message="O CPF deve estar no padrão 999.999.999-99", max=14, min=14)
 	private String cpf;
 	
 	@Column(name="datanascimento", nullable=false)
