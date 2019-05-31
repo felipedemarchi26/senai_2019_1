@@ -27,4 +27,19 @@ public class UsuarioService {
 		return this.usuarioRepository.save(usuario);
 	}
 	
+	public Usuario buscarPorId(Long id) {
+		if (id == null) {
+			throw new CustomRuntimeException("id", "Não foi informado um ID para consulta!");
+		}
+		Optional<Usuario> usuario = this.usuarioRepository.findById(id);
+		if (usuario.isPresent()) {
+			return usuario.get();
+		}
+		return null;
+	}
+	
+	public Iterable<Usuario> buscarTodos() {
+		return this.usuarioRepository.findAll();
+	}
+	
 }

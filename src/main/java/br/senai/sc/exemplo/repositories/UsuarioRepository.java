@@ -13,7 +13,7 @@ public interface UsuarioRepository extends
 	
 	Optional<Usuario> findByCpf(String cpf);
 	
-	@Query(value="SELECT u FROM Usuario u WHERE u.email LIKE %:email%")
+	@Query(value="SELECT u FROM Usuario u WHERE u.email = :email")
 	Optional<Usuario> buscarPorEmail(@Param("email") String email);
 
 }
