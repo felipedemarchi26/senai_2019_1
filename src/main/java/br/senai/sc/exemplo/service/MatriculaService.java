@@ -1,8 +1,10 @@
 package br.senai.sc.exemplo.service;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import br.senai.sc.exemplo.domain.Matricula;
@@ -42,6 +44,18 @@ public class MatriculaService {
 		matricula.setUsuario(usuario);
 		matricula.setValorMatricula(matriculaWs.getValorMatricula());
 		return matricula;
+	}
+	
+	public List<Matricula> listarMatriculasPaginado(int page, int size) {
+		return this.matriculaRepository.listarMatriculasPaginado(PageRequest.of(page, size));
+	}
+	
+	public List<Matricula> buscarMatriculasPorUsuario(Long idUsuario) {
+		if (idUsuario == null) {
+			throw new CustomRuntimeException("usuario", "É obrigatório informar um usuário");
+		}
+		List<Matricula> matriculas = this.matriculaRepository.buscarMatriculasPorUsuario(idUsuario);
+		return matriculas;
 	}
 	
 }

@@ -1,11 +1,15 @@
 package br.senai.sc.exemplo.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,5 +39,18 @@ public class MatriculaController {
 		Matricula matricula = this.matriculaService.salvar(matriculaWs);
 		return new ResponseEntity<Matricula>(matricula, HttpStatus.OK);
 	}
+	
+	@GetMapping("/listar-paginado/{page}/{size}")
+	public ResponseEntity<?> listarPaginado(@PathVariable("page") int page, @PathVariable("size") int size) {
+		List<Matricula> matriculas = this.matriculaService.listarMatriculasPaginado(page, size);
+		return new ResponseEntity<List<Matricula>>(matriculas, HttpStatus.OK);
+	}
+	
+	@GetMapping("/buscar-por-usuario/{idUsuario}")
+	public ResponseEntity<?> buscarPorUsuario(@PathVariable("idUsuario") Long idUsuario) {
+		List<Matricula> matriculas = this.matriculaService.buscarMatriculasPorUsuario(idUsuario);
+		return new ResponseEntity<List<Matricula>>(matriculas, HttpStatus.OK);
+	}
+	
 	
 }
