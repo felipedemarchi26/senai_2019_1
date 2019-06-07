@@ -1,5 +1,6 @@
 package br.senai.sc.exemplo.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import br.senai.sc.exemplo.domain.Usuario;
 import br.senai.sc.exemplo.exceptions.CustomRuntimeException;
+import br.senai.sc.exemplo.projections.UsuarioProjection;
 import br.senai.sc.exemplo.repositories.UsuarioRepository;
 
 @Service
@@ -40,6 +42,10 @@ public class UsuarioService {
 	
 	public Iterable<Usuario> buscarTodos() {
 		return this.usuarioRepository.findAll();
+	}
+	
+	public List<UsuarioProjection> listarTodos() {
+		return this.usuarioRepository.listarTodos();
 	}
 	
 }

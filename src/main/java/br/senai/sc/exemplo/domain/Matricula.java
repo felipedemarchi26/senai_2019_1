@@ -26,7 +26,7 @@ public class Matricula {
 
 	@Column(name = "datamatricula", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
-	@JsonFormat(pattern="dd/MM/yyyy hh:mm:ss")
+	@JsonFormat(pattern = "dd/MM/yyyy hh:mm:ss")
 	private Date dataMatricula;
 
 	@Column(name = "valormatricula", nullable = true)
@@ -35,6 +35,10 @@ public class Matricula {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "idusuario")
 	private Usuario usuario;
+
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "idcurso")
+	private Curso curso;
 
 	public Long getIdMatricula() {
 		return idMatricula;
@@ -66,6 +70,14 @@ public class Matricula {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	public Curso getCurso() {
+		return curso;
+	}
+
+	public void setCurso(Curso curso) {
+		this.curso = curso;
 	}
 
 }

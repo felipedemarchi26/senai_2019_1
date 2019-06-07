@@ -1,5 +1,7 @@
 package br.senai.sc.exemplo.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 import javax.websocket.server.PathParam;
 
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.senai.sc.exemplo.components.MapValidationComponent;
 import br.senai.sc.exemplo.domain.Usuario;
+import br.senai.sc.exemplo.projections.UsuarioProjection;
 import br.senai.sc.exemplo.service.UsuarioService;
 
 @RestController
@@ -49,6 +52,12 @@ public class UsuarioController {
 	public ResponseEntity<?> listarTodos() {
 		Iterable<Usuario> usuarios = this.usuarioService.buscarTodos();
 		return new ResponseEntity<Iterable<Usuario>>(usuarios, HttpStatus.OK);
+	}
+	
+	@GetMapping("/listar-todos-2")
+	public ResponseEntity<?> listarTodos2() {
+		List<UsuarioProjection> usuarios = this.usuarioService.listarTodos();
+		return new ResponseEntity<List<UsuarioProjection>>(usuarios, HttpStatus.OK);
 	}
 	
 }

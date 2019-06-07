@@ -5,11 +5,14 @@ import javax.validation.constraints.NotNull;
 public class MatriculaWs {
 
 	private Long idMatricula;
-	
+
 	private Double valorMatricula;
-	
-	@NotNull(message="É obrigatório informar o usuário que está se matriculando!")
+
+	@NotNull(message = "É obrigatório informar o usuário que está se matriculando!")
 	private Long idUsuario;
+
+	@NotNull(message = "É obrigatório informar o curso em que o usuário está se matriculando!")
+	private Long idCurso;
 
 	public Long getIdMatricula() {
 		return idMatricula;
@@ -34,5 +37,13 @@ public class MatriculaWs {
 	public void setIdUsuario(Long idUsuario) {
 		this.idUsuario = idUsuario;
 	}
-	
+
+	public Long getIdCurso() {
+		return idCurso;
+	}
+
+	public void setIdCurso(Long idCurso) {
+		this.idCurso = idCurso;
+	}
+
 }
