@@ -20,11 +20,19 @@ public class UsuarioService {
 	public Usuario salvar(Usuario usuario) {
 		Optional<Usuario> usuarioOptional = this.usuarioRepository.findByCpf(usuario.getCpf());
 		if (usuarioOptional.isPresent()) {
-			throw new CustomRuntimeException("cpf", "CPF já cadastrado!");
+			Usuario usuarioCpf = usuarioOptional.get();
+			if (usuario.getIdUsuario() == null ||
+					usuario.getIdUsuario() != usuarioCpf.getIdUsuario()) {
+				throw new CustomRuntimeException("cpf", "CPF já cadastrado!");
+			}
 		}
 		usuarioOptional = this.usuarioRepository.buscarPorEmail(usuario.getEmail());
 		if (usuarioOptional.isPresent()) {
-			throw new CustomRuntimeException("email", "E-mail já cadastrado!");
+			Usuario usuarioEmail = usuarioOptional.get();
+			if (usuario.getIdUsuario() == null ||
+					usuarioEmail.getIdUsuario() != usuario.getIdUsuario()) {
+				throw new CustomRuntimeException("email", "E-mail já cadastrado!");
+			}
 		}
 		return this.usuarioRepository.save(usuario);
 	}
